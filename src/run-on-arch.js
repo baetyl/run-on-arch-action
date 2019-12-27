@@ -6,11 +6,10 @@ async function main() {
   if (process.platform === 'linux') {
 
     const arch = core.getInput('architecture', {required: true})
-    const distro = core.getInput('distribution', {required: true})
     const runs = core.getInput('run', {required: true})
 
     console.log('Configuring Docker for multi-architecture support')
-    await exec(path.join(__dirname, 'run-on-arch.sh'),[arch,distro,runs])
+    await exec(path.join(__dirname, 'run-on-arch.sh'),[arch,runs])
   } else {
     throw new Error('run-on-arch supports only Linux')
   }

@@ -1,0 +1,8 @@
+# Remove some common IDE working directories
+.idea
+.vscode
+*.iml
+
+# Mac
+.DS_Store
+
