@@ -1,7 +1,7 @@
-on: [pull_request]
+on: [push]
 
 jobs:
-  testactions_job:
+  testactions_buster:
     runs-on: ubuntu-latest
     name: A job to test the multi architecture action
     steps:
@@ -10,6 +10,24 @@ jobs:
       uses: baetyl/run-on-arch-action@master
       with:
         architecture: amd64
+        distribution: buster
+        run: |
+          go version
+          echo ::set-output name=uname::$(go version)
+    - name: Get the output
+      run: |
+        echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
+
+  testactions_stretch:
+    runs-on: ubuntu-latest
+    name: A job to test the multi architecture action
+    steps:
+    - name: Run some commands on amd64
+      id: runcmd
+      uses: baetyl/run-on-arch-action@master
+      with:
+        architecture: amd64
+        distribution: stretch
         run: |
           go version
           echo ::set-output name=uname::$(go version)

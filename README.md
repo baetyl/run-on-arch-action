@@ -10,6 +10,7 @@ A Github Action that executes commands on an alternative architecture (amd64, i3
 This action requires three input parameters:
 
 * `architecture`: The cpu architecture of the container that will run your commands;
+* `distribution`: The Linux distribution the will be launched by the container (right now, Debian stretch and buster);
 * `run`: A series of commands that will be executed.
 
 The action does not define any default output variable, feel free to create as many as you want and set them in the `run` block. 
@@ -31,6 +32,7 @@ jobs:
         id: runcmd
         with:
           architecture: armv7
+          distribution: buster
           run: |
             uname -a
             echo ::set-output name=uname::$(uname -a)
@@ -45,12 +47,12 @@ This table contains a list of possible Architecture/Distribution combinations:
 
 | Architecture | Distributions |
 | -------- | ------------- |
-| amd64    | buster |
-| i386    | buster |
-| arm64    | buster|
-| armv7  | buster |
-| s390x  | buster |
-| ppc64le  | buster |
+| amd64    | stretch, buster |
+| i386    | stretch, buster |
+| arm64    | stretch, buster|
+| armv7  | stretch, buster |
+| s390x  | stretch, buster |
+| ppc64le  | stretch, buster |
 
 Using an invalid combination will result in a crash but new configuration can be easily added if a working docker image is available.
 
